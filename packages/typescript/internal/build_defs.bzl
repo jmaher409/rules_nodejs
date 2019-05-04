@@ -206,6 +206,9 @@ def tsc_wrapped_tsconfig(
     # Since g3 isn't ready to do this yet
     config["compilerOptions"]["target"] = "es2015"
 
+    if config["bazelOptions"].get("overrideModuleType", False):
+        config["compilerOptions"]["module"] = "es6"
+
     # If the user gives a tsconfig attribute, the generated file should extend
     # from the user's tsconfig.
     # See https://github.com/Microsoft/TypeScript/issues/9876
