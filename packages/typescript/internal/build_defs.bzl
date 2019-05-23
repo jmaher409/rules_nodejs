@@ -206,8 +206,8 @@ def tsc_wrapped_tsconfig(
     # Since g3 isn't ready to do this yet
     config["compilerOptions"]["target"] = "es2015"
 
-    if config["bazelOptions"].get("overrideModuleType", False):
-        config["compilerOptions"]["module"] = "es6"
+    # hack override of module type to test es6 modules and node 12
+    config["compilerOptions"]["module"] = "es6"
 
     # If the user gives a tsconfig attribute, the generated file should extend
     # from the user's tsconfig.
@@ -252,6 +252,7 @@ def _ts_library_impl(ctx):
     Returns:
       the struct returned by the call to compile_ts.
     """
+
     ts_providers = compile_ts(
         ctx,
         is_library = True,
